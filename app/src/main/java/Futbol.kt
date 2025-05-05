@@ -141,7 +141,7 @@ fun Futbol(onBack: () -> Unit) {
                         "según informó el cuerpo médico. Su reemplazante será Juan Pablo Pignani, joven central de las inferiores " +
                         "que ya tuvo un buen rendimiento en su última presentación.\n\n" +
                         "La baja de Salomón es sensible para Platense, ya que venía siendo titular tanto en el torneo local " +
-                        "como en la Copa Argentina. ¡Le deseamos una pronta recuperación!",
+                        "como en la Copa Argentina. ¡Le deseamos una pronta recuperación",
                 fontSize = 16.sp,
                 color = Color.DarkGray,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)

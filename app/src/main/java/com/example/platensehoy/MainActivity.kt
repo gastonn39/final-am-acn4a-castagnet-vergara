@@ -57,7 +57,7 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
         stringResource(R.string.noticia_principal),
         stringResource(R.string.seccion_basquet) + " consigue una gran victoria contra Boca por 96 a 94.",
         "El equipo entrena en el Ciudad de Vicente López de cara al partido contra Racing.",
-        "Oscar Salomón lesionado y se perderá lo que queda del campeonato."
+        "Oscar Salomón lesionado y se perderá lo que queda del campeonato!."
     )
 
     LazyColumn(
