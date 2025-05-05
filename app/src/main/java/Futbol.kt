@@ -2,7 +2,6 @@ package com.example.platensehoy
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
@@ -142,7 +141,7 @@ fun PantallaFutbol(onBack: () -> Unit) {
                         "según informó el cuerpo médico. Su reemplazante será Juan Pablo Pignani, joven central de las inferiores " +
                         "que ya tuvo un buen rendimiento en su última presentación.\n\n" +
                         "La baja de Salomón es sensible para Platense, ya que venía siendo titular tanto en el torneo local " +
-                        "como en la Copa Argentina. ¡Le deseamos una pronta recuperación",
+                        "como en la Copa Argentina. ¡Le deseamos una pronta recuperación!",
                 fontSize = 16.sp,
                 color = Color.DarkGray,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)

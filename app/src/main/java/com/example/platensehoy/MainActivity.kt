@@ -180,3 +180,48 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
     }
 }
 
+@Composable
+fun Futbol(onBack: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "Sección Fútbol",
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF4E3629)
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+
+        Image(
+            painter = painterResource(id = R.drawable.final_gyc_cap),
+            contentDescription = "Entrenamiento",
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp)
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = "• El equipo entrena en Ciudad de Vicente López",
+            fontSize = 16.sp,
+            color = Color.DarkGray
+        )
+
+        Text(
+            text = "• Oscar Salomón se pierde lo que queda del torneo",
+            fontSize = 16.sp,
+            color = Color.DarkGray
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Button(onClick = onBack) {
+            Text("Volver")
+        }
+    }
+}
