@@ -82,7 +82,7 @@ fun PantallaPrincipal() {
         )
 
         Button(onClick = {
-            noticias = noticias + "Nueva noticia agregada dinámicamente"
+            noticias = noticias + "Nueva noticia agregada"
         }) {
             Text("Agregar Noticia")
         }
