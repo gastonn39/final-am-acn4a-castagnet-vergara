@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">PlatenseHOY</string>
+
+    <!-- Menú -->
+    <string name="seccion_ultimas">Últimas noticias</string>
+    <string name="seccion_futbol">Fútbol</string>
+    <string name="seccion_basquet">Básquet</string>
+    <string name="seccion_login">Login</string>
+
+    <!-- Noticias -->
+    <string name="noticia_principal">Platense se quedó sin nada en el Bosque y jugará los octavos de final contra Racing.</string>
+    <string name="subtitulo_principal">Análisis del partido</string>
+    <string name="texto_principal">Si bien Platense tuvo las jugadas más claras, en la última del partido lo perdió contra el Lobo con un gol de cabeza de Nicolás Garayalde. Durante gran parte del encuentro, el Calamar mostró orden y actitud ofensiva, pero le faltó precisión en los últimos metros. El mediocampo se vio superado por momentos y la línea de fondo cometió errores clave. Puntos altos en Platense: Juan Pablo Pignani y Vázquez. En cambio, quienes anduvieron flojos fueron el doble 5 (Baldassarra y Juárez), el lateral Silva y los delanteros Orsini y Lotti.</string>
+
+    <string name="otras_noticias">Otras noticias</string>
 </resources>
