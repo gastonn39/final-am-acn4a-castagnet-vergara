@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.material3.HorizontalDivider
 
 @Composable
-fun PantallaFutbol(onBack: () -> Unit) {
+fun Futbol(onBack: () -> Unit) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
