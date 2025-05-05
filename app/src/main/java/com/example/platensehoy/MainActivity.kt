@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PlatenseHOYTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-                    PantallaPrincipal()
+                    AppController()
                 }
             }
         }
@@ -34,7 +35,21 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun PantallaPrincipal() {
+fun AppController() {
+    var currentScreen by remember { mutableStateOf("home") }
+
+    when (currentScreen) {
+        "home" -> PantallaPrincipal(onSeccionClick = { seccion ->
+            if (seccion == "Fútbol") {
+                currentScreen = "futbol"
+            }
+        })
+        "futbol" -> PantallaFutbol(onBack = { currentScreen = "home" })
+    }
+}
+
+@Composable
+fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
     val noticias = listOf(
         stringResource(R.string.noticia_principal),
         stringResource(R.string.seccion_basquet) + " consigue una gran victoria contra Boca por 96 a 94.",
@@ -64,7 +79,7 @@ fun PantallaPrincipal() {
                 )
             }
 
-            // Menú horizontal fijo
+            // Menú horizontal fijo clickeable
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -73,17 +88,18 @@ fun PantallaPrincipal() {
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 val secciones = listOf(
-                    R.string.seccion_ultimas,
-                    R.string.seccion_futbol,
-                    R.string.seccion_basquet,
-                    R.string.seccion_login
+                    stringResource(R.string.seccion_ultimas),
+                    "Fútbol",
+                    stringResource(R.string.seccion_basquet),
+                    stringResource(R.string.seccion_login)
                 )
-                secciones.forEach { seccionId ->
+                secciones.forEach { seccion ->
                     Text(
-                        text = stringResource(id = seccionId),
+                        text = seccion,
                         color = Color.White,
                         fontWeight = FontWeight.SemiBold,
-                        fontSize = 14.sp
+                        fontSize = 14.sp,
+                        modifier = Modifier.clickable { onSeccionClick(seccion) }
                     )
                 }
             }
@@ -157,8 +173,10 @@ fun PantallaPrincipal() {
             )
         }
 
+        // Espacio para scroll
         item {
             Spacer(modifier = Modifier.height(100.dp))
         }
     }
 }
+
