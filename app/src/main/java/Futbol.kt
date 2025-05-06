@@ -23,7 +23,7 @@ fun Futbol(onBack: () -> Unit) {
             .background(Color.White)
     ) {
         item {
-            // Header fijo (PlatenseHOY + menú)
+
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -59,7 +59,7 @@ fun Futbol(onBack: () -> Unit) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Título principal
+
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -74,7 +74,7 @@ fun Futbol(onBack: () -> Unit) {
                 )
             }
 
-            // Primera sección
+
             Image(
                 painter = painterResource(id = R.drawable.plantel),
                 contentDescription = "Entrenamiento",
@@ -149,7 +149,7 @@ fun Futbol(onBack: () -> Unit) {
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Botón para volver
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center

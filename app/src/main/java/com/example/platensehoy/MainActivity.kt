@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.platensehoy.ui.theme.PlatenseHOYTheme
 import com.example.platensehoy.Futbol
+import com.example.platensehoy.PantallaLogin
+
 
 
 class MainActivity : ComponentActivity() {
@@ -42,14 +44,17 @@ fun AppController() {
 
     when (currentScreen) {
         "home" -> PantallaPrincipal(onSeccionClick = { seccion ->
-            if (seccion == "Fútbol") {
-                currentScreen = "futbol"
+            when (seccion) {
+                "Fútbol" -> currentScreen = "futbol"
+                "Login" -> currentScreen = "login"
             }
         })
         "futbol" -> Futbol(onBack = { currentScreen = "home" })
-
+        "login" -> PantallaLoginScreen(onBack = { currentScreen = "home" })
     }
 }
+
+
 
 @Composable
 fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
@@ -82,7 +87,7 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
                 )
             }
 
-            // Menú horizontal fijo clickeable
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -109,7 +114,7 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Imagen destacada
+
             Image(
                 painter = painterResource(id = R.drawable.final_gyc_cap),
                 contentDescription = "Imagen del partido",
@@ -120,7 +125,7 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Título de la noticia principal
+
             Text(
                 text = noticias[0],
                 fontSize = 24.sp,
@@ -131,7 +136,7 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Subtítulo
+
             Text(
                 text = stringResource(R.string.subtitulo_principal),
                 fontSize = 16.sp,
@@ -140,7 +145,7 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
             )
 
-            // Texto extendido
+
             Text(
                 text = stringResource(R.string.texto_principal),
                 fontSize = 16.sp,
@@ -148,7 +153,7 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
             )
 
-            // Línea divisoria
+
             HorizontalDivider(
                 color = Color(0xFF4E3629),
                 thickness = 1.dp,
@@ -156,7 +161,7 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
                     .padding(horizontal = 16.dp, vertical = 8.dp)
             )
 
-            // Sección de otras noticias
+
             Text(
                 text = stringResource(R.string.otras_noticias),
                 fontSize = 18.sp,
@@ -166,7 +171,7 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
             )
         }
 
-        // Lista de otras noticias
+
         items(noticias.drop(1)) { noticia ->
             Text(
                 text = "• $noticia",
@@ -176,7 +181,7 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
             )
         }
 
-        // Espacio para scroll
+
         item {
             Spacer(modifier = Modifier.height(100.dp))
         }
