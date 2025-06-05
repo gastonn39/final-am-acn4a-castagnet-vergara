@@ -13,6 +13,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.material3.HorizontalDivider
+import com.example.platensehoy.ui.theme.MarronPlatense
 
 @Composable
 fun Futbol(onBack: () -> Unit) {
@@ -22,28 +24,55 @@ fun Futbol(onBack: () -> Unit) {
             .background(Color.White)
     ) {
         item {
+
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(MarronPlatense)
-                    .padding(16.dp),
+                    .padding(vertical = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
                     text = "PlatenseHOY",
-                    fontSize = 28.sp,
+                    fontSize = 32.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
             }
 
-            Text(
-                text = "FÚTBOL",
-                fontSize = 32.sp,
-                fontWeight = FontWeight.Bold,
-                color = MarronPlatense,
-                modifier = Modifier.padding(top = 16.dp, bottom = 8.dp).align(Alignment.CenterHorizontally)
-            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MarronPlatense)
+                    .padding(vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                val secciones = listOf("Últimas noticias", "Fútbol", "Básquet", "Login")
+                secciones.forEach { seccion ->
+                    Text(
+                        text = seccion,
+                        color = Color.White,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 14.sp
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "FÚTBOL",
+                    fontSize = 39.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = MarronPlatense
+                )
+            }
 
             Image(
                 painter = painterResource(id = R.drawable.plantel),
@@ -64,11 +93,20 @@ fun Futbol(onBack: () -> Unit) {
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
 
+            Spacer(modifier = Modifier.height(4.dp))
+
             Text(
-                text = "El equipo ya se entrena pensando en Racing...", // Reemplazar por stringResource
+                text = "El equipo ya se entrena pensando en Racing, y no hay lluvia que lo detenga...",
                 fontSize = 16.sp,
                 color = Color.DarkGray,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+            HorizontalDivider(
+                color = Color.LightGray,
+                thickness = 1.dp,
+                modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
             )
 
             Image(
@@ -80,27 +118,43 @@ fun Futbol(onBack: () -> Unit) {
                     .padding(horizontal = 16.dp)
             )
 
+            Spacer(modifier = Modifier.height(8.dp))
+
             Text(
-                text = "Oscar Salomón se pierde el torneo",
+                text = "Oscar Salomón se pierde lo que queda del torneo",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = MarronPlatense,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
 
+            Spacer(modifier = Modifier.height(4.dp))
+
             Text(
-                text = "El defensor sufrió un desgarro...", // Reemplazar por stringResource
+                text = "El defensor sufrió un desgarro tipo 2 que lo mantendrá alejado...",
                 fontSize = 16.sp,
                 color = Color.DarkGray,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
             )
 
-            Button(
-                onClick = onBack,
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
             ) {
-                Text("Volver")
+                Button(onClick = onBack) {
+                    Text("Volver")
+                }
             }
+
+            HorizontalDivider(
+                color = Color.LightGray,
+                thickness = 1.dp,
+                modifier = Modifier.padding(vertical = 16.dp, horizontal = 16.dp)
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
         }
     }
 }
