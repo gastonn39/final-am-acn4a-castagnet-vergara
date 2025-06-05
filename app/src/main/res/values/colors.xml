@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <!-- Colores personalizados -->
+    <color name="marron_platense">#4E3629</color>
+    <color name="gris_oscuro">#A9A9A9</color>
+
 </resources>

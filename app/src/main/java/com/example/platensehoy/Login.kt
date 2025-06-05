@@ -10,114 +10,11 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.Alignment
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.text.font.FontWeight
-
-
-@Composable
-fun PantallaLoginScreen(onBack: () -> Unit)
- {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-    ) {
-        item {
-
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color(0xFF4E3629))
-                    .padding(vertical = 16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "PlatenseHOY",
-                    fontSize = 32.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White
-                )
-            }
-
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color(0xFF4E3629))
-                    .padding(vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                val secciones = listOf("Últimas noticias", "Fútbol", "Básquet", "Login")
-                secciones.forEach { seccion ->
-                    Text(
-                        text = seccion,
-                        color = Color.White,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 14.sp
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 32.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Iniciar Sesión",
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color(0xFF4E3629)
-                )
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                var usuario by remember { mutableStateOf("") }
-                var password by remember { mutableStateOf("") }
-
-                OutlinedTextField(
-                    value = usuario,
-                    onValueChange = { usuario = it },
-                    label = { Text("Usuario") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                OutlinedTextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    label = { Text("Contraseña") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                Button(onClick = { /* Acción de login */ }) {
-                    Text("Ingresar")
-                }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                TextButton(onClick = onBack) {
-                    Text("Volver al inicio")
-                }
-            }
-        }
-    }
-}
-
+import com.example.platensehoy.ui.theme.MarronPlatense
 
 @Composable
-fun PantallaLogin(onBack: () -> Unit) {
-    var usuario by remember { mutableStateOf("") }
-    var contraseña by remember { mutableStateOf("") }
-
+fun PantallaLoginScreen(onBack: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -125,9 +22,12 @@ fun PantallaLogin(onBack: () -> Unit) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Iniciar Sesión", fontSize = 28.sp, color = Color(0xFF4E3629))
+        Text("Iniciar Sesión", fontSize = 28.sp, color = MarronPlatense)
 
         Spacer(modifier = Modifier.height(24.dp))
+
+        var usuario by remember { mutableStateOf("") }
+        var contraseña by remember { mutableStateOf("") }
 
         OutlinedTextField(
             value = usuario,
@@ -147,7 +47,7 @@ fun PantallaLogin(onBack: () -> Unit) {
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(onClick = {
-
+            // Acción de login
         }) {
             Text("Ingresar")
         }
@@ -159,5 +59,3 @@ fun PantallaLogin(onBack: () -> Unit) {
         }
     }
 }
-
-

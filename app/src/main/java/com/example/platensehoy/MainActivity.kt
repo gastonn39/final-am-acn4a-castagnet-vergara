@@ -20,10 +20,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.platensehoy.ui.theme.PlatenseHOYTheme
+import com.example.platensehoy.ui.theme.MarronPlatense
+
+import com.example.platensehoy.PantallaLoginScreen
 import com.example.platensehoy.Futbol
-import com.example.platensehoy.PantallaLogin
-
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,8 +54,6 @@ fun AppController() {
     }
 }
 
-
-
 @Composable
 fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
     val noticias = listOf(
@@ -71,11 +69,10 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
             .background(Color.White)
     ) {
         item {
-            // Encabezado
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(0xFF4E3629))
+                    .background(MarronPlatense)
                     .padding(vertical = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -87,17 +84,16 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
                 )
             }
 
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(0xFF4E3629))
+                    .background(MarronPlatense)
                     .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 val secciones = listOf(
                     stringResource(R.string.seccion_ultimas),
-                    "Fútbol",
+                    stringResource(R.string.seccion_futbol),
                     stringResource(R.string.seccion_basquet),
                     stringResource(R.string.seccion_login)
                 )
@@ -114,7 +110,6 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-
             Image(
                 painter = painterResource(id = R.drawable.final_gyc_cap),
                 contentDescription = "Imagen del partido",
@@ -125,26 +120,23 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
 
             Spacer(modifier = Modifier.height(12.dp))
 
-
             Text(
                 text = noticias[0],
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF4E3629),
+                color = MarronPlatense,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
-
             Text(
                 text = stringResource(R.string.subtitulo_principal),
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF4E3629),
+                color = MarronPlatense,
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
             )
-
 
             Text(
                 text = stringResource(R.string.texto_principal),
@@ -153,38 +145,33 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
             )
 
-
             HorizontalDivider(
-                color = Color(0xFF4E3629),
+                color = MarronPlatense,
                 thickness = 1.dp,
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 8.dp)
             )
 
-
             Text(
                 text = stringResource(R.string.otras_noticias),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF4E3629),
+                color = MarronPlatense,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
         }
-
 
         items(noticias.drop(1)) { noticia ->
             Text(
                 text = "• $noticia",
                 fontSize = 16.sp,
-                color = Color(0xFF4E3629),
+                color = MarronPlatense,
                 modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp)
             )
         }
-
 
         item {
             Spacer(modifier = Modifier.height(100.dp))
         }
     }
 }
-
