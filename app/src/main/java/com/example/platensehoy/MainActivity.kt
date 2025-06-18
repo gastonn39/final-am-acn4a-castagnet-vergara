@@ -22,9 +22,6 @@ import androidx.compose.ui.unit.sp
 import com.example.platensehoy.ui.theme.PlatenseHOYTheme
 import com.example.platensehoy.ui.theme.MarronPlatense
 
-import com.example.platensehoy.PantallaLoginScreen
-import com.example.platensehoy.Futbol
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,11 +44,12 @@ fun AppController() {
             when (seccion) {
                 "Fútbol" -> currentScreen = "futbol"
                 "Login" -> currentScreen = "login"
+
             }
         })
         "futbol" -> Futbol(onBack = { currentScreen = "home" })
         "login" -> PantallaLoginScreen(onBack = { currentScreen = "home" })
-    }
+           }
 }
 
 @Composable
@@ -97,6 +95,7 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
                     stringResource(R.string.seccion_basquet),
                     stringResource(R.string.seccion_login)
                 )
+
                 secciones.forEach { seccion ->
                     Text(
                         text = seccion,
