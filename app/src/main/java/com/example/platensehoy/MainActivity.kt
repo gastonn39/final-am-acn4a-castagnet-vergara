@@ -3,7 +3,6 @@ package com.example.platensehoy
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.platensehoy.ui.theme.PlatenseHOYTheme
 import com.example.platensehoy.ui.theme.MarronPlatense
+import androidx.compose.foundation.Image
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,15 +41,20 @@ fun AppController() {
 
     when (currentScreen) {
         "home" -> PantallaPrincipal(onSeccionClick = { seccion ->
-            when (seccion) {
-                "Fútbol" -> currentScreen = "futbol"
-                "Login" -> currentScreen = "login"
-
+            currentScreen = when (seccion) {
+                "Fútbol" -> "futbol"
+                "Básquet" -> "basquet"
+                "Login" -> "login"
+                else -> "home"
             }
         })
-        "futbol" -> Futbol(onBack = { currentScreen = "home" })
-        "login" -> PantallaLoginScreen(onBack = { currentScreen = "home" })
-           }
+        "futbol" -> Futbol(onNavigate = { currentScreen = it })
+        "basquet" -> Basquet(onBack = { currentScreen = "home" })
+        "login" -> PantallaLoginScreen(
+            onBack = { currentScreen = "home" },
+            onNavigate = { seccion -> currentScreen = seccion }
+        )
+    }
 }
 
 @Composable
@@ -91,11 +96,10 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
             ) {
                 val secciones = listOf(
                     stringResource(R.string.seccion_ultimas),
-                    stringResource(R.string.seccion_futbol),
-                    stringResource(R.string.seccion_basquet),
-                    stringResource(R.string.seccion_login)
+                    "Fútbol",
+                    "Básquet",
+                    "Login"
                 )
-
                 secciones.forEach { seccion ->
                     Text(
                         text = seccion,
