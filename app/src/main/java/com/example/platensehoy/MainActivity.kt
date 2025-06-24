@@ -21,6 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.platensehoy.ui.theme.MarronPlatense
 import com.example.platensehoy.ui.theme.PlatenseHOYTheme
+import kotlinx.coroutines.delay
+import androidx.compose.ui.layout.ContentScale
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,10 +31,43 @@ class MainActivity : ComponentActivity() {
         setContent {
             PlatenseHOYTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = Color.White) {
-                    AppController()
+                    SplashController()
                 }
             }
         }
+    }
+}
+
+@Composable
+fun SplashController() {
+    var showSplash by remember { mutableStateOf(true) }
+
+    LaunchedEffect(Unit) {
+        delay(2500)
+        showSplash = false
+    }
+
+    if (showSplash) {
+        SplashScreen()
+    } else {
+        AppController()
+    }
+}
+
+@Composable
+fun SplashScreen() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White),
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.logo_platense),
+            contentDescription = "Logo Platense",
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
     }
 }
 
