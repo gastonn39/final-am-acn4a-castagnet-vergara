@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "838111272274",
+    "project_id": "platensehoy",
+    "storage_bucket": "platensehoy.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838111272274:android:5d8868044de025ebffee8b",
+        "android_client_info": {
+          "package_name": "com.example.platensehoy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvke701jOnUBAqV9uDsJPwvoQfS4SXmZI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
