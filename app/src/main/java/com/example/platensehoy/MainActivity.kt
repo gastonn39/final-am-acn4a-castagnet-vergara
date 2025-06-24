@@ -3,6 +3,7 @@ package com.example.platensehoy
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -18,9 +19,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.platensehoy.ui.theme.PlatenseHOYTheme
 import com.example.platensehoy.ui.theme.MarronPlatense
-import androidx.compose.foundation.Image
+import com.example.platensehoy.ui.theme.PlatenseHOYTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +52,7 @@ fun AppController() {
         "basquet" -> Basquet(onBack = { currentScreen = "home" })
         "login" -> PantallaLoginScreen(
             onBack = { currentScreen = "home" },
-            onNavigate = { seccion -> currentScreen = seccion }
+            onNavigate = { currentScreen = it }
         )
     }
 }

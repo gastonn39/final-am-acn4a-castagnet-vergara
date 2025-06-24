@@ -10,18 +10,37 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import com.example.platensehoy.ui.theme.MarronPlatense
-import com.example.platensehoy.R
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
+import android.widget.Toast
 
 @Composable
 fun Futbol(onNavigate: (String) -> Unit) {
+    val context = LocalContext.current
+    val db = FirebaseFirestore.getInstance()
     val comentarios = remember { mutableStateListOf<String>() }
     var nuevoComentario by remember { mutableStateOf("") }
+
+    // 🔁 Escuchar cambios en Firestore
+    DisposableEffect(Unit) {
+        val listener: ListenerRegistration = db.collection("comentarios_futbol")
+            .addSnapshotListener { snapshot, error ->
+                if (error == null && snapshot != null) {
+                    comentarios.clear()
+                    for (doc in snapshot.documents) {
+                        doc.getString("texto")?.let { comentarios.add(it) }
+                    }
+                }
+            }
+
+        onDispose { listener.remove() }
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -29,7 +48,6 @@ fun Futbol(onNavigate: (String) -> Unit) {
             .background(Color.White)
     ) {
         item {
-            // 🟫 Encabezado
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -45,7 +63,6 @@ fun Futbol(onNavigate: (String) -> Unit) {
                 )
             }
 
-            // 🟫 Menú
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -72,116 +89,124 @@ fun Futbol(onNavigate: (String) -> Unit) {
                 }
             }
 
-            // ✅ Contenido con padding interno
-            Column(modifier = Modifier.padding(dimensionResource(R.dimen.padding_general))) {
+            Spacer(modifier = Modifier.height(16.dp))
 
-                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.margin_vertical)))
+            // Banner corregido
+            Image(
+                painter = painterResource(id = R.drawable.plantel),
+                contentDescription = "Entrenamiento",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(220.dp)
+            )
 
-                Image(
-                    painter = painterResource(id = R.drawable.plantel),
-                    contentDescription = "Entrenamiento",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp)
-                )
+            Spacer(modifier = Modifier.height(16.dp))
 
-                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.espaciado)))
+            Text(
+                text = "El equipo se entrena en Ciudad de Vicente López",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MarronPlatense,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
 
-                Text(
-                    text = "El equipo se entrena en Ciudad de Vicente López",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MarronPlatense
-                )
+            Text(
+                text = "El equipo ya se entrena pensando en Racing, y no hay lluvia que lo detenga...",
+                fontSize = 16.sp,
+                color = Color.DarkGray,
+                modifier = Modifier.padding(16.dp)
+            )
 
-                Text(
-                    text = "El equipo ya se entrena pensando en Racing, y no hay lluvia que lo detenga...",
-                    fontSize = 16.sp,
-                    color = Color.DarkGray,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                )
+            Spacer(modifier = Modifier.height(16.dp))
 
-                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.margin_vertical)))
+            Image(
+                painter = painterResource(id = R.drawable.salomon),
+                contentDescription = "Lesión de Salomón",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(220.dp)
+            )
 
-                Image(
-                    painter = painterResource(id = R.drawable.salomon),
-                    contentDescription = "Lesión de Salomón",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp)
-                )
+            Spacer(modifier = Modifier.height(16.dp))
 
-                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.espaciado)))
+            Text(
+                text = "Oscar Salomón se pierde lo que queda del torneo",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = MarronPlatense,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
 
-                Text(
-                    text = "Oscar Salomón se pierde lo que queda del torneo",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MarronPlatense
-                )
+            Text(
+                text = "El defensor sufrió un desgarro tipo 2 que lo mantendrá alejado...",
+                fontSize = 16.sp,
+                color = Color.DarkGray,
+                modifier = Modifier.padding(16.dp)
+            )
 
-                Text(
-                    text = "El defensor sufrió un desgarro tipo 2 que lo mantendrá alejado...",
-                    fontSize = 16.sp,
-                    color = Color.DarkGray,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                )
+            Spacer(modifier = Modifier.height(32.dp))
 
-                Spacer(modifier = Modifier.height(32.dp))
+            Text(
+                text = "Comentarios del partido",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MarronPlatense,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
 
-                // SECCIÓN DE COMENTARIOS
-                Text(
-                    text = "Comentarios del partido",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MarronPlatense
-                )
+            Spacer(modifier = Modifier.height(16.dp))
 
-                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.espaciado)))
+            OutlinedTextField(
+                value = nuevoComentario,
+                onValueChange = { nuevoComentario = it },
+                label = { Text("Dejá tu comentario") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            )
 
-                OutlinedTextField(
-                    value = nuevoComentario,
-                    onValueChange = { nuevoComentario = it },
-                    label = { Text("Dejá tu comentario") },
-                    modifier = Modifier.fillMaxWidth()
-                )
+            Spacer(modifier = Modifier.height(16.dp))
 
-                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.espaciado)))
-
-                Button(
-                    onClick = {
-                        if (nuevoComentario.isNotBlank()) {
-                            comentarios.add(nuevoComentario)
-                            nuevoComentario = ""
-                        }
+            Button(
+                onClick = {
+                    if (nuevoComentario.isNotBlank()) {
+                        db.collection("comentarios_futbol").add(mapOf("texto" to nuevoComentario))
+                            .addOnSuccessListener {
+                                nuevoComentario = ""
+                                Toast.makeText(context, "Comentario agregado", Toast.LENGTH_SHORT).show()
+                            }
+                            .addOnFailureListener {
+                                Toast.makeText(context, "Error: ${it.message}", Toast.LENGTH_LONG).show()
+                            }
                     }
-                ) {
-                    Text("Agregar comentario")
-                }
-
-                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.margin_vertical)))
-
-                comentarios.forEach { comentario ->
-                    Text(
-                        text = "• $comentario",
-                        fontSize = dimensionResource(R.dimen.text_size_normal).value.sp,
-                        modifier = Modifier.padding(vertical = 4.dp)
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Button(onClick = { onNavigate("home") }) {
-                        Text("Volver")
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(32.dp))
+                },
+                modifier = Modifier.padding(horizontal = 16.dp)
+            ) {
+                Text("Agregar comentario")
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            comentarios.forEach { comentario ->
+                Text(
+                    text = "• $comentario",
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(horizontal = 24.dp, vertical = 4.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Button(onClick = { onNavigate("home") }) {
+                    Text("Volver")
+                }
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
