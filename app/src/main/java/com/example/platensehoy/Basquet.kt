@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import com.example.platensehoy.ui.theme.MarronPlatense
 import com.example.platensehoy.R
+import androidx.compose.ui.layout.ContentScale
 
 @Composable
 fun Basquet(onBack: () -> Unit) {
@@ -66,8 +67,8 @@ fun Basquet(onBack: () -> Unit) {
                 contentDescription = "Imagen partido vs Boca",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
-                    .padding(horizontal = 16.dp)
+                    .height(200.dp),
+                contentScale = ContentScale.Crop
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -94,8 +95,8 @@ fun Basquet(onBack: () -> Unit) {
                 contentDescription = "Imagen general básquet",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
-                    .padding(horizontal = 16.dp)
+                    .height(200.dp),
+                contentScale = ContentScale.Crop
             )
 
             Spacer(modifier = Modifier.height(8.dp))
