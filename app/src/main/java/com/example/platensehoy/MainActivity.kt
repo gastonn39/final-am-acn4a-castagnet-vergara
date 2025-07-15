@@ -20,9 +20,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.example.platensehoy.ui.theme.MarronPlatense
 import com.example.platensehoy.ui.theme.PlatenseHOYTheme
 import kotlinx.coroutines.delay
+import android.content.Intent
+import androidx.compose.ui.platform.LocalContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,15 +98,32 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
 
     LazyColumn(modifier = Modifier.fillMaxSize().background(Color.White)) {
         item {
-            Column(
-                modifier = Modifier.fillMaxWidth().background(MarronPlatense).padding(vertical = 16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+            ConstraintLayout(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MarronPlatense)
+                    .padding(vertical = 16.dp)
             ) {
-                Text("PlatenseHOY", fontSize = 32.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                val (titulo) = createRefs()
+                Text(
+                    text = "PlatenseHOY",
+                    fontSize = 32.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    modifier = Modifier.constrainAs(titulo) {
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+                )
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth().background(MarronPlatense).padding(vertical = 8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(MarronPlatense)
+                    .padding(vertical = 8.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 val secciones = listOf("Últimas noticias", "Fútbol", "Básquet", "Login")
@@ -123,6 +143,23 @@ fun PantallaPrincipal(onSeccionClick: (String) -> Unit) {
 
         item {
             NoticiasDestacadas()
+        }
+
+        // Botón con texto más estético
+        item {
+            val context = LocalContext.current
+            Button(
+                onClick = {
+                    val intent = Intent(context, SecondActivity::class.java)
+                    intent.putExtra("mensaje", "Información adicional sobre Platense")
+                    context.startActivity(intent)
+                },
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .fillMaxWidth()
+            ) {
+                Text("Ver información adicional")
+            }
         }
 
         item {
