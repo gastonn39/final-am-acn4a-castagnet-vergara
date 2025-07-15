@@ -43,7 +43,8 @@ Repositorio GitHub
 
 ## Autor
 
-- **Gaston Castagnet**  
+- **Gaston Castagnet** 
+- **Cesar Vergara** 
   - Curso: ACN4AV  
   - Año: 2025  
   - Escuela Da Vinci
