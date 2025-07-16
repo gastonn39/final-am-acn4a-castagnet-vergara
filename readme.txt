@@ -34,10 +34,15 @@ Tecnologías usadas:
 - **Firebase Firestore**
 
 ---
+** Usuarios:
+Usuario: prueba39@platense.com	
+Contraseña: 123456
+Usuario: prueba01@platense.com
+Contraseña: abcdef
 
 Repositorio GitHub
 
-[https://github.com/gastonn39/parcial-1-am-acn4av--castagnet-](https://github.com/gastonn39/parcial-1-am-acn4av--castagnet-)
+https://github.com/gastonn39/final-am-acn4a-castagnet-vergara.git
 
 ---
 
